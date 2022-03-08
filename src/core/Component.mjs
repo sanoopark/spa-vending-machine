@@ -13,14 +13,19 @@ export default class Component {
 
   mounted() {}
 
-  addEvent({ className, eventType, callback }) {
-    this.target.querySelector(className).addEventListener(eventType, callback.bind(this));
+  addEvent({ eventType, selector, callback, element = this.target.querySelector(selector) }) {
+    const children = [...element.querySelectorAll(selector)];
+    const isTarget = target => children.includes(target) || target.closest(selector);
+    element.addEventListener(eventType, event => {
+      if (!isTarget(event.target)) return;
+      callback?.bind(this)(event);
+    });
   }
 
-  setState(addedState) {
+  setState(newState) {
     this.state = {
       ...this.state,
-      ...addedState,
+      ...newState,
     };
     this.render();
     this.setEvent();

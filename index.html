@@ -2,10 +2,26 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>자판기</title>
     <script src="https://cdn.jsdelivr.net/npm/@woowacourse/mission-utils@1.0.1/dist/mission-utils.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <header class="banner">
+        <h1 class="banner__title">자판기</h1>
+        <ul class="banner__control">
+          <li><button class="change-button" type="button">상품 관리</button></li>
+          <li><button class="change-button" type="button">잔돈 충전</button></li>
+          <li><button class="change-button" type="button">상품 구매</button></li>
+        </ul>
+      </header>
+      <main class="main"></main>
+      <footer class="footer"></footer>
+    </div>
+    <script src="/src/main.mjs" type="module"></script>
   </body>
 </html>
