@@ -13,9 +13,10 @@ export default class Component {
 
   mounted() {}
 
-  addEvent({ eventType, selector, callback, element = this.target.querySelector(selector) }) {
-    const children = [...element.querySelectorAll(selector)];
-    const isTarget = target => children.includes(target) || target.closest(selector);
+  addEvent({ eventType, selector, callback }) {
+    const element = this.target.querySelector(selector);
+    const isTarget = target => target.closest(selector);
+
     element.addEventListener(eventType, event => {
       if (!isTarget(event.target)) return;
       callback?.bind(this)(event);
