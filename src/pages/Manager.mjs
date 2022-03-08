@@ -2,7 +2,7 @@ import { MESSAGE } from '../constants.js';
 import Component from '../core/Component.mjs';
 import { localStorage } from '../storage.mjs';
 
-export default class Management extends Component {
+export default class Manager extends Component {
   mounted() {
     const data = localStorage.get('product-status', this.state) || [];
     this.setState({ data });

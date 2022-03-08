@@ -1,5 +1,5 @@
 import Component from './core/Component.mjs';
-import Management from './pages/Management.mjs';
+import Manager from './pages/Manager.mjs';
 import { browserRoute, redirect, route } from './router.mjs';
 
 export default class App extends Component {
@@ -15,7 +15,7 @@ export default class App extends Component {
 
     route({
       path: [/^\/?$/i, /^\/manage\/?$/i],
-      component: Management,
+      component: Manager,
       target: mainElement,
       initialState: { data: [] },
     });
