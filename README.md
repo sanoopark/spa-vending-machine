@@ -50,20 +50,20 @@
 
 - [x] `상품 구매` 페이지에서 최초 충전 금액은 0원이며, 반환된 각 동전의 개수는 0개이다.
 - [x] 사용자는 투입할 금액 입력 요소에 투입 금액을 입력한 후, `투입하기`버튼을 이용하여 금액을 투입한다.
-  - 금액은 10원으로 나누어 떨어지는 금액만 투입할 수 있다.
-  - 자판기가 보유한 금액은 `{금액}원` 형식으로 나타낸다.
-- 금액은 누적으로 투입할 수 있다.
-- 품절된 상품의 `구매하기` 버튼은 disabled 되어야 한다.
-- 사용자는 `반환하기` 버튼을 통해 잔돈을 반환 받을 수 있다.
+  - [x] 금액은 10원으로 나누어 떨어지는 금액만 투입할 수 있다.
+  - [x] 자판기가 보유한 금액은 `{금액}원` 형식으로 나타낸다.
+- [x] 금액은 누적으로 투입할 수 있다.
+- [x] 품절된 상품의 `구매하기` 버튼은 disabled 되어야 한다.
+- [x] 사용자는 `반환하기` 버튼을 통해 잔돈을 반환 받을 수 있다.
 
 **상품 구매 > 잔돈 계산 모듈**
 
 `상품 구매` 탭에서 잔돈 반환 시 다음과 같은 규칙을 통해 잔돈을 반환한다.
 
-- 잔돈을 돌려줄 때는 현재 보유한 최소 개수의 동전으로 잔돈을 돌려준다.
-- 지폐를 잔돈으로 반환하는 경우는 없다고 가정한다.
-- 잔돈을 반환할 수 없는 경우 잔돈으로 반환할 수 있는 금액만 반환한다.
-- 동전의 개수를 나타내는 정보는 `{개수}개` 형식으로 나타낸다.
+- [x] 잔돈을 돌려줄 때는 현재 보유한 최소 개수의 동전으로 잔돈을 돌려준다.
+- [x] 지폐를 잔돈으로 반환하는 경우는 없다고 가정한다.
+- [x] 잔돈을 반환할 수 없는 경우 잔돈으로 반환할 수 있는 금액만 반환한다.
+- [x] 동전의 개수를 나타내는 정보는 `{개수}개` 형식으로 나타낸다.
 
 ---
 
@@ -154,22 +154,22 @@
 
 ### 공통 요구사항
 
-- 스크립트 추가 외에 주어진 `index.html`파일은 수정할 수 없다.
-  - 스타일(css)은 채점 요소가 아니다.
-- 모든 예외 발생 상황은 `alert`메서드를 이용하여 처리한다.
-- 외부 라이브러리(jQuery, Lodash 등)를 사용하지 않고, 순수 Vanilla JS로만 구현한다.
-- **[자바스크립트 코드 컨벤션](https://github.com/woowacourse/woowacourse-docs/tree/feature/styleguide/styleguide/javascript)을 지키면서 프로그래밍** 한다.
-- **indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용**한다.
-  - 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
-  - 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메소드)를 분리하면 된다.
-- **함수(또는 메소드)가 한 가지 일만 하도록 최대한 작게** 만들어라.
-- 변수 선언시 `var` 를 사용하지 않는다. `const` 와 `let` 을 사용한다.
-  - [const](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/const)
-  - [let](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/let)
-- `import` 문을 이용해 스크립트를 모듈화하고 불러올 수 있게 만든다.
-  - [https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/import](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/import)
-- **함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현한다.**
-  - 함수(또는 메소드)가 한 가지 일만 잘 하도록 구현한다.
+- [x] 스크립트 추가 외에 주어진 `index.html`파일은 수정할 수 없다.
+- [x] 스타일(css)은 채점 요소가 아니다.
+- [x] 모든 예외 발생 상황은 `alert`메서드를 이용하여 처리한다.
+- [x] 외부 라이브러리(jQuery, Lodash 등)를 사용하지 않고, 순수 Vanilla JS로만 구현한다.
+- [x] **[자바스크립트 코드 컨벤션](https://github.com/woowacourse/woowacourse-docs/tree/feature/styleguide/styleguide/javascript)을 지키면서 프로그래밍** 한다.
+- [x] **indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용**한다.
+- [x] 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
+- [x] 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메소드)를 분리하면 된다.
+- [ ] **함수(또는 메소드)가 한 가지 일만 하도록 최대한 작게** 만들어라.
+- [x] 변수 선언시 `var` 를 사용하지 않는다. `const` 와 `let` 을 사용한다.
+- [x] [const](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/const)
+- [x] [let](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/let)
+- [x] `import` 문을 이용해 스크립트를 모듈화하고 불러올 수 있게 만든다.
+- [x] [https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/import](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/import)
+- [x] **함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현한다.**
+- [x] 함수(또는 메소드)가 한 가지 일만 잘 하도록 구현한다.
 
 ---
 
