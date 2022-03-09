@@ -180,6 +180,7 @@ export default class Seller extends Component {
         10: 0,
       },
       holdingCoinAmount: 0,
+      returnCoinStatus,
       returnAmount: 0,
       chargeAmount: 0,
     });

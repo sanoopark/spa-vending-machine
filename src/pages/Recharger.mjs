@@ -1,16 +1,19 @@
-import { MESSAGE } from '../constants.js';
+import { MESSAGE, COINS } from '../constants.js';
 import Component from '../core/Component.mjs';
 import { localStorage } from '../storage.mjs';
 
 export default class Recharger extends Component {
   mounted() {
-    const counts = localStorage.get('holding-coin-status');
-    const amount = localStorage.get('holding-coin-amount');
+    this.synchronizeStateWithStorage();
+  }
 
-    if (counts && amount) {
-      this.setState({ counts });
-      this.setState({ amount });
-    }
+  synchronizeStateWithStorage() {
+    const { counts, amount } = this.state;
+
+    this.setState({
+      counts: localStorage.get('holding-coin-status') || counts,
+      amount: localStorage.get('holding-coin-amount') || amount,
+    });
   }
 
   render() {
@@ -51,31 +54,37 @@ export default class Recharger extends Component {
   handleAddButtonClick() {
     const inputElement = this.target.querySelector('#vending-machine-charge-input');
     const rechargeAmount = Number(inputElement.value);
-    const copyOfCounts = this.state.counts;
-    const coins = Object.keys(copyOfCounts)
-      .map(Number)
-      .sort((a, b) => b - a);
+    const newCounts = this.state.counts;
 
     if (rechargeAmount <= 0) {
       alert(MESSAGE.EMPTY_CHARGE_INPUT);
       return;
     }
 
-    let amountTarget = rechargeAmount;
-
-    while (amountTarget > 0) {
-      const randomCoin = MissionUtils.Random.pickNumberInList(coins);
-      if (amountTarget < randomCoin) continue;
-      amountTarget -= randomCoin;
-      copyOfCounts[randomCoin]++;
-    }
+    this.#getRandomCoinsUpToAmount(rechargeAmount, newCounts);
 
     this.setState({
-      counts: copyOfCounts,
+      counts: newCounts,
       amount: this.state.amount + rechargeAmount,
     });
 
-    localStorage.set('holding-coin-status', this.state.counts);
-    localStorage.set('holding-coin-amount', this.state.amount);
+    this.#synchronizeStorageWithState();
+  }
+
+  #getRandomCoinsUpToAmount(rechargeAmount, newCounts) {
+    let amountTarget = rechargeAmount;
+
+    while (amountTarget > 0) {
+      const randomCoin = MissionUtils.Random.pickNumberInList(COINS);
+      if (amountTarget < randomCoin) continue;
+      amountTarget -= randomCoin;
+      newCounts[randomCoin]++;
+    }
+  }
+
+  #synchronizeStorageWithState() {
+    const { counts, amount } = this.state;
+    localStorage.set('holding-coin-status', counts);
+    localStorage.set('holding-coin-amount', amount);
   }
 }
