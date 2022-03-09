@@ -162,3 +162,8 @@ li {
 .product-purchase-item > span:not(:last-child) {
   border-right: 1px solid black;
 }
+
+#coin-return-button {
+  height: 1.8rem;
+  margin: 2rem 0 1rem 0;
+}

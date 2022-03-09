@@ -62,6 +62,27 @@ export default class App extends Component {
     });
   }
 
+  render() {
+    this.target.innerHTML = `
+      <header class="banner">
+        <h1 class="banner__title">자판기</h1>
+        <ul class="banner__control">
+          <li>
+            <button type="button" id="product-purchase-menu" data-href="/manage">상품 관리</button>
+          </li>
+          <li>
+            <button type="button" id="vending-machine-manage-menu" data-href="/recharge">잔돈 충전</button>
+          </li>
+          <li>
+            <button type="button" id="product-add-menu" data-href="/purchase">상품 구매</button>
+          </li>
+        </ul>
+      </header>
+      <main class="main"></main>
+      <footer class="footer"></footer>
+    `;
+  }
+
   setEvent() {
     this.addEvent({
       eventType: 'click',
