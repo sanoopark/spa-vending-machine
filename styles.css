@@ -48,6 +48,8 @@ li {
   height: 100%;
 }
 
+/* -- Manager --  */
+
 .control-layout {
   display: flex;
   margin-bottom: 4rem;
@@ -58,36 +60,73 @@ li {
   height: 1.8rem;
 }
 
-.three-col-layout {
+.product-table-title,
+.product-manage-item {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(auto-fill, 1fr);
   max-width: 40rem;
   min-height: 5rem;
-  border: 2px solid black;
+  border: 1px solid black;
 }
 
-.three-col-layout > span {
+.product-manage-item {
+  border-top: 0;
+}
+
+.product-table-title > span,
+.product-manage-item > span {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   min-height: 5rem;
 }
 
-.two-col-layout {
+.product-table-title > span:first-child,
+.product-table-title > span:nth-child(2) {
+  border-right: 1px solid black;
+}
+
+.product-manage-item > span {
+  border-top: 0;
+}
+
+.product-manage-item > span:first-child,
+.product-manage-item > span:nth-child(2) {
+  border-right: 1px solid black;
+}
+
+/* -- Recharger -- */
+
+.coin-status-table {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(auto-fill, 1fr);
   max-width: 20rem;
   min-height: 5rem;
-  border: 2px solid black;
+  border: 1px solid black;
 }
 
-.two-col-layout > span {
+.coin-status-table > span {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   min-height: 5rem;
+}
+
+.coin-status-table > span:nth-child(odd) {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.coin-status-table > span:nth-child(9) {
+  border-bottom: 0;
+}
+
+.coin-status-table > span:nth-child(even) {
+  border-bottom: 1px solid black;
+}
+
+.coin-status-table > span:nth-child(10) {
+  border: 0;
 }
