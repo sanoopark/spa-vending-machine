@@ -86,6 +86,12 @@ export default class Seller extends Component {
   handleChargeButton() {
     const inputElement = this.target.querySelector('#charge-input');
     const inputAmount = Number(inputElement.value);
+    const isValidUnit = inputAmount % 10 === 0;
+
+    if (!isValidUnit) {
+      alert(MESSAGE.PRICE_UNIT);
+      return true;
+    }
 
     this.setState({
       chargeAmount: this.state.chargeAmount + inputAmount,

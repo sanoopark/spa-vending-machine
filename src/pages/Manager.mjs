@@ -31,23 +31,23 @@ export default class Manager extends Component {
         <span>가격</span>
         <span>수량</span>
       </section>
-        ${data
-          .map(
-            (row, index) => `
-              <div class="product-manage-item">
-                ${Object.entries(row)
-                  .map(
-                    ([key, value]) => `
-                      <span class="product-manage-${key}" data-row="${index}" data-type="${key}">
-                        ${value}
-                      </span>
-                    `
-                  )
-                  .join('')}
-               </div>
-              `
-          )
-          .join('')}
+      ${data
+        .map(
+          (row, index) => `
+            <div class="product-manage-item">
+              ${Object.entries(row)
+                .map(
+                  ([key, value]) => `
+                    <span class="product-manage-${key}" data-row="${index}" data-type="${key}">
+                      ${value}
+                    </span>
+                  `
+                )
+                .join('')}
+              </div>
+            `
+        )
+        .join('')}
     `;
   }
 
@@ -58,16 +58,36 @@ export default class Manager extends Component {
   handleAddButtonClick() {
     const controlLayout = this.target.querySelector('.control-layout');
     const values = [...controlLayout.querySelectorAll('input')].map(target => target.value);
+    const [name, price, quantity] = values;
+    const isEmptyInput = values.some(value => value === '');
+    const isLeastPrice = price >= 100;
+    const isValidPriceUnit = price % 10 === 0;
 
-    if (values.some(value => value === '')) {
-      alert(MESSAGE.MISSED_INPUT);
-      return;
-    }
+    if (this.#isInvalidInputValue(isEmptyInput, isLeastPrice, isValidPriceUnit)) return;
 
     this.setState({
-      data: [...this.state.data, { name: values[0], price: values[1], quantity: values[2] }],
+      data: [...this.state.data, { name, price, quantity }],
     });
 
     localStorage.set('product-status', this.state.data);
+  }
+
+  #isInvalidInputValue(isEmptyInput, isLeastPrice, isValidPriceUnit) {
+    if (isEmptyInput) {
+      alert(MESSAGE.MISSED_INPUT);
+      return true;
+    }
+
+    if (!isLeastPrice) {
+      alert(MESSAGE.LEAST_PRICE);
+      return true;
+    }
+
+    if (!isValidPriceUnit) {
+      alert(MESSAGE.PRICE_UNIT);
+      return true;
+    }
+
+    return false;
   }
 }

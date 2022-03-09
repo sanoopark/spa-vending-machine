@@ -4,4 +4,6 @@ export const MESSAGE = {
   EMPTY_CHARGE_INPUT: '충전하실 금액을 입력해 주세요',
   SHORT_CHANGE: '거스름돈이 부족해 잔돈을 모두 반환할 수 없습니다',
   SHORT_QUANTITY: '수량이 부족합니다',
+  LEAST_PRICE: '100원 이상의 상품 가격을 입력해 주세요',
+  PRICE_UNIT: '10원 단위의 상품 가격을 입력해 주세요',
 };
