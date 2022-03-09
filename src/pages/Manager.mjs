@@ -48,7 +48,6 @@ export default class Manager extends Component {
               `
           )
           .join('')}
-      </section>
     `;
   }
 
@@ -61,7 +60,7 @@ export default class Manager extends Component {
     const values = [...controlLayout.querySelectorAll('input')].map(target => target.value);
 
     if (values.some(value => value === '')) {
-      alert(MESSAGE.EMPTY_INPUT);
+      alert(MESSAGE.MISSED_INPUT);
       return;
     }
 

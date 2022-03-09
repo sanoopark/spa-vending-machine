@@ -1,10 +1,11 @@
+import { MESSAGE } from '../constants.js';
 import Component from '../core/Component.mjs';
 import { localStorage } from '../storage.mjs';
 
 export default class Recharger extends Component {
   mounted() {
-    const counts = localStorage.get('coin-status');
-    const amount = localStorage.get('coin-amount');
+    const counts = localStorage.get('holding-coin-status');
+    const amount = localStorage.get('holding-coin-amount');
 
     if (counts && amount) {
       this.setState({ counts });
@@ -49,27 +50,32 @@ export default class Recharger extends Component {
 
   handleAddButtonClick() {
     const inputElement = this.target.querySelector('#vending-machine-charge-input');
-    const amount = Number(inputElement.value);
+    const rechargeAmount = Number(inputElement.value);
     const copyOfCounts = this.state.counts;
     const coins = Object.keys(copyOfCounts)
       .map(Number)
       .sort((a, b) => b - a);
 
-    let remainder = amount;
+    if (rechargeAmount <= 0) {
+      alert(MESSAGE.EMPTY_CHARGE_INPUT);
+      return;
+    }
 
-    coins.forEach(coin => {
-      if (remainder >= coin) {
-        copyOfCounts[coin] += Math.floor(remainder / coin);
-        remainder = remainder % coin;
-      }
-    });
+    let amountTarget = rechargeAmount;
+
+    while (amountTarget > 0) {
+      const randomCoin = MissionUtils.Random.pickNumberInList(coins);
+      if (amountTarget < randomCoin) continue;
+      amountTarget -= randomCoin;
+      copyOfCounts[randomCoin]++;
+    }
 
     this.setState({
       counts: copyOfCounts,
-      amount: this.state.amount + amount,
+      amount: this.state.amount + rechargeAmount,
     });
 
-    localStorage.set('coin-status', this.state.counts);
-    localStorage.set('coin-amount', this.state.amount);
+    localStorage.set('holding-coin-status', this.state.counts);
+    localStorage.set('holding-coin-amount', this.state.amount);
   }
 }

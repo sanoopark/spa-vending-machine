@@ -48,17 +48,17 @@ li {
   height: 100%;
 }
 
-/* -- Manager --  */
-
 .control-layout {
   display: flex;
-  margin-bottom: 4rem;
+  margin-bottom: 1.5rem;
 }
 
 .control-layout > input {
   margin-right: 2rem;
   height: 1.8rem;
 }
+
+/* -- Manager --  */
 
 .product-table-title,
 .product-manage-item {
@@ -129,4 +129,36 @@ li {
 
 .coin-status-table > span:nth-child(10) {
   border: 0;
+}
+
+/* -- Seller -- */
+
+.purchase-table-title,
+.product-purchase-item {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(auto-fill, 1fr);
+  max-width: 40rem;
+  min-height: 5rem;
+  border: 1px solid black;
+}
+
+.product-purchase-item {
+  border-top: 0;
+}
+
+.purchase-table-title > span,
+.product-purchase-item > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 5rem;
+}
+
+.purchase-table-title > span:not(:last-child) {
+  border-right: 1px solid black;
+}
+
+.product-purchase-item > span:not(:last-child) {
+  border-right: 1px solid black;
 }

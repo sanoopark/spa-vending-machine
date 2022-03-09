@@ -1,6 +1,7 @@
 import Component from './core/Component.mjs';
 import Manager from './pages/Manager.mjs';
 import Recharger from './pages/Recharger.mjs';
+import Seller from './pages/Seller.mjs';
 import { browserRoute, redirect, route } from './router.mjs';
 
 export default class App extends Component {
@@ -33,6 +34,30 @@ export default class App extends Component {
           50: 0,
           10: 0,
         },
+      },
+    });
+
+    route({
+      path: [/^\/purchase\/?$/i],
+      component: Seller,
+      target: mainElement,
+      state: {
+        productStatus: [],
+        holdingCoinStatus: {
+          500: 0,
+          100: 0,
+          50: 0,
+          10: 0,
+        },
+        holdingCoinAmount: 0,
+        returnCoinStatus: {
+          500: 0,
+          100: 0,
+          50: 0,
+          10: 0,
+        },
+        returnAmount: 0,
+        chargeAmount: 0,
       },
     });
   }

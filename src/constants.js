@@ -1,3 +1,7 @@
 export const MESSAGE = {
-  EMPTY_INPUT: '모든 정보를 입력해 주세요',
+  MISSED_INPUT: '모든 정보를 입력해 주세요',
+  SHORT_MONEY: '투입 금액이 더 필요합니다',
+  EMPTY_CHARGE_INPUT: '충전하실 금액을 입력해 주세요',
+  SHORT_CHANGE: '거스름돈이 부족해 잔돈을 모두 반환할 수 없습니다',
+  SHORT_QUANTITY: '수량이 부족합니다',
 };
