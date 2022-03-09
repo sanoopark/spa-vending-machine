@@ -19,7 +19,7 @@ export default class App extends Component {
       path: [/^\/?$/i, /^\/manage\/?$/i],
       component: Manager,
       target: mainElement,
-      state: { data: [] },
+      state: { productStatus: [] },
     });
 
     route({

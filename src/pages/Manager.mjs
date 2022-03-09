@@ -4,15 +4,19 @@ import { localStorage } from '../storage.mjs';
 
 export default class Manager extends Component {
   mounted() {
-    const data = localStorage.get('product-status');
+    this.synchronizeStateWithStorage();
+  }
 
-    if (data) {
-      this.setState({ data });
-    }
+  synchronizeStateWithStorage() {
+    const { productStatus } = this.state;
+
+    this.setState({
+      productStatus: localStorage.get('product-status') || productStatus,
+    });
   }
 
   render() {
-    const { data } = this.state;
+    const { productStatus } = this.state;
 
     this.target.innerHTML = `
       <h2>상품 추가하기</h2>
@@ -31,8 +35,8 @@ export default class Manager extends Component {
         <span>가격</span>
         <span>수량</span>
       </section>
-      ${data
-        .map(
+      ${productStatus
+        ?.map(
           (row, index) => `
             <div class="product-manage-item">
               ${Object.entries(row)
@@ -66,10 +70,10 @@ export default class Manager extends Component {
     if (this.#isInvalidInputValue(isEmptyInput, isLeastPrice, isValidPriceUnit)) return;
 
     this.setState({
-      data: [...this.state.data, { name, price, quantity }],
+      productStatus: [...this.state.productStatus, { name, price, quantity }],
     });
 
-    localStorage.set('product-status', this.state.data);
+    localStorage.set('product-status', this.state.productStatus);
   }
 
   #isInvalidInputValue(isEmptyInput, isLeastPrice, isValidPriceUnit) {
