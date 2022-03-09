@@ -27,8 +27,8 @@ export default class App extends Component {
       component: Recharger,
       target: mainElement,
       state: {
-        amount: 0,
-        counts: {
+        holdingCoinAmount: 0,
+        holdingCoinStatus: {
           500: 0,
           100: 0,
           50: 0,

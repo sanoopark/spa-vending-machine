@@ -8,16 +8,16 @@ export default class Recharger extends Component {
   }
 
   synchronizeStateWithStorage() {
-    const { counts, amount } = this.state;
+    const { holdingCoinStatus, holdingCoinAmount } = this.state;
 
     this.setState({
-      counts: localStorage.get('holding-coin-status') || counts,
-      amount: localStorage.get('holding-coin-amount') || amount,
+      counts: localStorage.get('holding-coin-status') || holdingCoinStatus,
+      amount: localStorage.get('holding-coin-amount') || holdingCoinAmount,
     });
   }
 
   render() {
-    const { counts, amount } = this.state;
+    const { holdingCoinStatus, holdingCoinAmount } = this.state;
 
     this.target.innerHTML = `
       <h2>자판기 동전 충전하기</h2>
@@ -26,19 +26,19 @@ export default class Recharger extends Component {
         <input type="number" id="vending-machine-charge-input" min="0" placeholder="금액" />
         <button type="button" id="vending-machine-charge-button">충전하기</button>
       </section>
-      <span id="vending-machine-charge-amount">보유 금액: ${amount}원</span>
+      <span id="vending-machine-charge-amount">보유 금액: ${holdingCoinAmount}원</span>
       <h2>동전 보유 현황</h2>
       <section class="coin-status-table">
         <span>동전</span>
         <span>개수</span>
         <span>500원</span>
-        <span id="vending-machine-coin-500-quantity">${counts[500]}개</span>
+        <span id="vending-machine-coin-500-quantity">${holdingCoinStatus[500]}개</span>
         <span>100원</span>
-        <span id="vending-machine-coin-100-quantity">${counts[100]}개</span>
+        <span id="vending-machine-coin-100-quantity">${holdingCoinStatus[100]}개</span>
         <span>50원</span>
-        <span id="vending-machine-coin-50-quantity">${counts[50]}개</span>
+        <span id="vending-machine-coin-50-quantity">${holdingCoinStatus[50]}개</span>
         <span>10원</span>
-        <span id="vending-machine-coin-10-quantity">${counts[10]}개</span>
+        <span id="vending-machine-coin-10-quantity">${holdingCoinStatus[10]}개</span>
       </section>
     `;
   }
@@ -52,20 +52,21 @@ export default class Recharger extends Component {
   }
 
   handleAddButtonClick() {
+    const { holdingCoinStatus, holdingCoinAmount } = this.state;
     const inputElement = this.target.querySelector('#vending-machine-charge-input');
     const rechargeAmount = Number(inputElement.value);
-    const newCounts = this.state.counts;
+    const newHodingCoinStatus = holdingCoinStatus;
 
     if (rechargeAmount <= 0) {
       alert(MESSAGE.EMPTY_CHARGE_INPUT);
       return;
     }
 
-    this.#getRandomCoinsUpToAmount(rechargeAmount, newCounts);
+    this.#getRandomCoinsUpToAmount(rechargeAmount, newHodingCoinStatus);
 
     this.setState({
-      counts: newCounts,
-      amount: this.state.amount + rechargeAmount,
+      holdingCoinStatus: newHodingCoinStatus,
+      holdingCoinAmount: holdingCoinAmount + rechargeAmount,
     });
 
     this.#synchronizeStorageWithState();
@@ -83,8 +84,8 @@ export default class Recharger extends Component {
   }
 
   #synchronizeStorageWithState() {
-    const { counts, amount } = this.state;
-    localStorage.set('holding-coin-status', counts);
-    localStorage.set('holding-coin-amount', amount);
+    const { holdingCoinStatus, holdingCoinAmount } = this.state;
+    localStorage.set('holding-coin-status', holdingCoinStatus);
+    localStorage.set('holding-coin-amount', holdingCoinAmount);
   }
 }
