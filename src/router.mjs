@@ -22,15 +22,15 @@ export const browserRoute = callback => {
   window.addEventListener('popstate', callback);
 };
 
-export const route = ({ path: targetRegex, component, target, initialState = {} }) => {
+export const route = ({ path: targetRegex, component, target, state = {} }) => {
   const { pathname: currentPath } = window.location;
 
   if (Array.isArray(targetRegex)) {
     const isRouteRequired = targetRegex.some(regex => regex.test(currentPath));
-    isRouteRequired && new component(target, initialState);
+    isRouteRequired && new component(target, state);
     return;
   }
 
   const isRouteRequired = targetRegex.test(currentPath);
-  isRouteRequired && new component(target, initialState);
+  isRouteRequired && new component(target, state);
 };

@@ -1,5 +1,6 @@
 import Component from './core/Component.mjs';
 import Manager from './pages/Manager.mjs';
+import Recharger from './pages/Recharger.mjs';
 import { browserRoute, redirect, route } from './router.mjs';
 
 export default class App extends Component {
@@ -11,13 +12,28 @@ export default class App extends Component {
   }
 
   routes() {
-    const mainElement = this.target.querySelector('.main');
+    const mainElement = document.querySelector('.main');
 
     route({
       path: [/^\/?$/i, /^\/manage\/?$/i],
       component: Manager,
       target: mainElement,
-      initialState: { data: [] },
+      state: { data: [] },
+    });
+
+    route({
+      path: [/^\/recharge\/?$/i],
+      component: Recharger,
+      target: mainElement,
+      state: {
+        amount: 0,
+        counts: {
+          500: 0,
+          100: 0,
+          50: 0,
+          10: 0,
+        },
+      },
     });
   }
 

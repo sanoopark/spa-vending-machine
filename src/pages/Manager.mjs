@@ -4,8 +4,11 @@ import { localStorage } from '../storage.mjs';
 
 export default class Manager extends Component {
   mounted() {
-    const data = localStorage.get('product-status', this.state) || [];
-    this.setState({ data });
+    const data = localStorage.get('product-status');
+
+    if (data) {
+      this.setState({ data });
+    }
   }
 
   render() {

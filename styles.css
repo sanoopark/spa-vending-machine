@@ -74,3 +74,20 @@ li {
   border: 1px solid black;
   min-height: 5rem;
 }
+
+.two-col-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(auto-fill, 1fr);
+  max-width: 20rem;
+  min-height: 5rem;
+  border: 2px solid black;
+}
+
+.two-col-layout > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  min-height: 5rem;
+}
