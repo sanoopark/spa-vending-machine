@@ -54,7 +54,9 @@ export default class Seller extends Component {
                       .join('')
                   }
                   <span>
-                    <button type="button" class="purchase-button" data-row="${index}">구매하기</button>
+                    <button type="button" class="purchase-button" data-row="${index}" ${this.checkDisabled(
+                product
+              )}>구매하기</button>
                   </span>
                 </div>
               `
@@ -75,6 +77,10 @@ export default class Seller extends Component {
         <span id="coin-10-quantity">${returnCoinStatus[10]}개</span>
       </section>
       `;
+  }
+
+  checkDisabled(product) {
+    return product.quantity === '0' ? 'disabled' : '';
   }
 
   setEvent() {
