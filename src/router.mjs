@@ -22,15 +22,24 @@ export const browserRoute = callback => {
   window.addEventListener('popstate', callback);
 };
 
-export const route = ({ path: targetRegex, component, target, state = {} }) => {
+const rootElement = document.body.firstElementChild;
+
+export const route = ({ path, component, target = rootElement, state = {} }) => {
   const { pathname: currentPath } = window.location;
 
-  if (Array.isArray(targetRegex)) {
-    const isRouteRequired = targetRegex.some(regex => regex.test(currentPath));
+  if (Array.isArray(path)) {
+    const isRouteRequired = path
+      .map(string => createPathRegex(string))
+      .some(targetRegex => targetRegex.test(currentPath));
     isRouteRequired && new component(target, state);
     return;
   }
 
-  const isRouteRequired = targetRegex.test(currentPath);
+  const isRouteRequired = createPathRegex(path).test(currentPath);
   isRouteRequired && new component(target, state);
+};
+
+const createPathRegex = path => {
+  const pathname = path.replace('/', '');
+  return new RegExp('^/' + pathname + '/?$', 'i');
 };

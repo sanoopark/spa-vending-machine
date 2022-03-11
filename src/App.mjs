@@ -16,14 +16,14 @@ export default class App extends Component {
     const mainElement = document.querySelector('.main');
 
     route({
-      path: [/^\/?$/i, /^\/manage\/?$/i],
+      path: ['/', '/manage'],
       component: Manager,
       target: mainElement,
       state: { productStatus: [] },
     });
 
     route({
-      path: [/^\/recharge\/?$/i],
+      path: '/recharge',
       component: Recharger,
       target: mainElement,
       state: {
@@ -38,7 +38,7 @@ export default class App extends Component {
     });
 
     route({
-      path: [/^\/purchase\/?$/i],
+      path: '/purchase',
       component: Seller,
       target: mainElement,
       state: {
