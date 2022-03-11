@@ -1,4 +1,4 @@
-import { MESSAGE } from '../constants.js';
+import { MESSAGE } from '../constants.mjs';
 import Component from '../core/Component.mjs';
 import { localStorage } from '../storage.mjs';
 

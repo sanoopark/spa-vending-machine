@@ -9,3 +9,10 @@ export const MESSAGE = {
 };
 
 export const COINS = [500, 100, 50, 10];
+
+export const COIN_STATUS = {
+  500: 0,
+  100: 0,
+  50: 0,
+  10: 0,
+};

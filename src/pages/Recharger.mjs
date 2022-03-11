@@ -1,4 +1,4 @@
-import { MESSAGE, COINS } from '../constants.js';
+import { MESSAGE, COINS } from '../constants.mjs';
 import Component from '../core/Component.mjs';
 import { localStorage } from '../storage.mjs';
 
