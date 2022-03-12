@@ -22,7 +22,7 @@ export default class Recharger extends Component {
     this.target.innerHTML = `
       <h2>자판기 동전 충전하기</h2>
       <section class="control-layout">
-        <label for="vending-machine-charge-input" class="a11y-hidden">충전 금액</label>
+        <label for="vending-machine-charge-input" hidden>충전 금액</label>
         <input type="number" id="vending-machine-charge-input" min="0" placeholder="금액" />
         <button type="button" id="vending-machine-charge-button">충전하기</button>
       </section>

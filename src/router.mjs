@@ -40,6 +40,10 @@ export const route = ({ path, component, target = rootElement, state = {} }) => 
 };
 
 const createPathRegex = path => {
-  const pathname = path.replace('/', '');
-  return new RegExp('^/' + pathname + '/?$', 'i');
+  return new RegExp(processPathname(path) + '/?(\\w+)?');
+};
+
+const processPathname = currentPath => {
+  const [pathname, parameter] = currentPath.split(':');
+  return parameter ? pathname.slice(0, -1) : pathname;
 };

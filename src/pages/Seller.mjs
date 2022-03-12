@@ -26,7 +26,7 @@ export default class Seller extends Component {
     this.target.innerHTML = `
         <h2>금액 투입</h2>
         <section class="control-layout">
-          <label for="charge-input" class="a11y-hidden">투입 금액</label>
+          <label for="charge-input" hidden>투입 금액</label>
           <input type="number" id="charge-input" min="0" placeholder="금액" />
           <button type="button" id="charge-button">투입하기</button>
         </section>

@@ -21,11 +21,11 @@ export default class Manager extends Component {
     this.target.innerHTML = `
       <h2>상품 추가하기</h2>
       <section class="control-layout">
-        <label for="product-name-input" class="a11y-hidden">상품명</label>
+        <label for="product-name-input" hidden>상품명</label>
         <input type="text" id="product-name-input" placeholder="상품명" />
-        <label for="product-price-input" class="a11y-hidden">가격</label>
+        <label for="product-price-input" hidden>가격</label>
         <input type="number" id="product-price-input" min="0" placeholder="가격" />
-        <label for="product-quantity-input" class="a11y-hidden">수량</label>
+        <label for="product-quantity-input" hidden>수량</label>
         <input type="number" id="product-quantity-input" min="0" placeholder="수량" />
         <button type="button" id="product-add-button">추가하기</button>
       </section>
