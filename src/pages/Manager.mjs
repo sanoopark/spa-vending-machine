@@ -5,6 +5,7 @@ import { localStorage } from '../storage.mjs';
 export default class Manager extends Component {
   mounted() {
     this.synchronizeStateWithStorage();
+    this.calculateContainerHeight();
   }
 
   synchronizeStateWithStorage() {
@@ -13,6 +14,18 @@ export default class Manager extends Component {
     this.setState({
       productStatus: localStorage.get('product-status') || productStatus,
     });
+  }
+
+  calculateContainerHeight() {
+    const number = this.state.productStatus.length;
+    const viewport = window.innerHeight;
+
+    if (number === 1) {
+      document.querySelector('#app').style.height = viewport;
+      return;
+    }
+
+    document.querySelector('#app').style.height = `${148 * (number - 1) + viewport}px`;
   }
 
   render() {
@@ -30,11 +43,6 @@ export default class Manager extends Component {
         <button type="button" id="product-add-button">추가하기</button>
       </section>
       <h2>상품 현황</h2>
-      <section class="product-table-title">
-        <span>상품명</span>
-        <span>가격</span>
-        <span>수량</span>
-      </section>
       ${productStatus
         ?.map(
           (row, index) => `
@@ -43,13 +51,12 @@ export default class Manager extends Component {
                 .map(
                   ([key, value]) => `
                     <span class="product-manage-${key}" data-row="${index}" data-type="${key}">
-                      ${value}
-                    </span>
-                  `
+                    ${value}${this.unitGenerator(key)}</span>
+                    `
                 )
                 .join('')}
-              </div>
-            `
+            </div>
+          `
         )
         .join('')}
     `;
@@ -74,6 +81,8 @@ export default class Manager extends Component {
     });
 
     localStorage.set('product-status', this.state.productStatus);
+
+    this.#increaseContainerHeight();
   }
 
   #isInvalidInputValue(isEmptyInput, isLeastPrice, isValidPriceUnit) {
@@ -93,5 +102,21 @@ export default class Manager extends Component {
     }
 
     return false;
+  }
+
+  unitGenerator(key) {
+    switch (key) {
+      case 'price':
+        return '원';
+      case 'quantity':
+        return '개';
+      default:
+        return '';
+    }
+  }
+
+  #increaseContainerHeight() {
+    const containerHeight = document.querySelector('#app').offsetHeight;
+    document.querySelector('#app').style.height = `${containerHeight + 148}px`;
   }
 }

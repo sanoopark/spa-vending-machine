@@ -19,7 +19,7 @@ export default class App extends Component {
       path: ['/', '/manage'],
       component: Manager,
       target: mainElement,
-      state: { productStatus: [] },
+      state: { productStatus: [{ name: '코카콜라', price: 2000, quantity: 20 }] },
     });
 
     route({
@@ -64,7 +64,7 @@ export default class App extends Component {
         </ul>
       </header>
       <main class="main"></main>
-      <footer class="footer"></footer>
+      <footer class="footer">CocaCola</footer>
     `;
   }
 

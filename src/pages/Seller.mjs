@@ -24,59 +24,53 @@ export default class Seller extends Component {
     const { returnCoinStatus, chargeAmount, productStatus } = this.state;
 
     this.target.innerHTML = `
-        <h2>금액 투입</h2>
-        <section class="control-layout">
-          <label for="charge-input" hidden>투입 금액</label>
-          <input type="number" id="charge-input" min="0" placeholder="금액" />
-          <button type="button" id="charge-button">투입하기</button>
-        </section>
-        <span id="charge-amount">투입한 금액: ${chargeAmount}원</span>
-        <h2>구매할 수 있는 상품 현황</h2>
-        <section class="purchase-table-title">
-          <span>상품명</span>
-          <span>가격</span>
-          <span>수량</span>
-          <span>구매</span>
-        </section>
-        <section class="purchase-table-content">
-          ${productStatus
-            .map(
-              (product, index) => `
-                <div class="product-purchase-item">
-                  ${
-                    product &&
-                    Object.entries(product)
-                      .map(
-                        ([key, value]) => `
-                          <span class="product-purchase-${key}" data-row="${index}" data-product-${key}="${value}">${value}</span>
-                        `
-                      )
-                      .join('')
-                  }
-                  <span>
-                    <button type="button" class="purchase-button" data-row="${index}" ${this.checkDisabled(
-                product
-              )}>구매하기</button>
-                  </span>
-                </div>
-              `
-            )
-            .join('')}
-        </section>
-        <button type="button" id="coin-return-button">반환하기</button>
-        <section class="coin-status-table">
-        <span>동전</span>
-        <span>개수</span>
-        <span>500원</span>
-        <span id="coin-500-quantity">${returnCoinStatus[500]}개</span>
-        <span>100원</span>
-        <span id="coin-100-quantity">${returnCoinStatus[100]}개</span>
-        <span>50원</span>
-        <span id="coin-50-quantity">${returnCoinStatus[50]}개</span>
-        <span>10원</span>
-        <span id="coin-10-quantity">${returnCoinStatus[10]}개</span>
+      <h2>금액 투입</h2>
+      <section class="control-layout">
+        <label for="charge-input" hidden>투입 금액</label>
+        <input type="number" id="charge-input" min="0" placeholder="금액" />
+        <button type="button" id="charge-button">투입하기</button>
       </section>
-      `;
+      <span id="charge-amount">투입한 금액: ${chargeAmount}원</span>
+      <h2>구매할 수 있는 상품 현황</h2>
+      <section class="purchase-table-content">
+        ${productStatus
+          .map(
+            (product, index) => `
+              <div class="product-purchase-item">
+                ${
+                  product &&
+                  Object.entries(product)
+                    .map(
+                      ([key, value]) => `
+                        <span class="product-purchase-${key}" data-row="${index}" data-product-${key}="${value}">${value}</span>`
+                    )
+                    .join('')
+                }
+                <span>
+                  <button type="button" class="purchase-button" data-row="${index}" ${this.checkDisabled(product)}>
+                    구매하기</button>
+                </span>
+              </div>
+            `
+          )
+          .join('')}
+      </section>
+      <button type="button" id="coin-return-button">반환하기</button>
+      <div class="modal-overlay">
+        <section class="coin-status-table modal">
+          <span>동전</span>
+          <span>개수</span>
+          <span>500원</span>
+          <span id="coin-500-quantity">${returnCoinStatus[500]}개</span>
+          <span>100원</span>
+          <span id="coin-100-quantity">${returnCoinStatus[100]}개</span>
+          <span>50원</span>
+          <span id="coin-50-quantity">${returnCoinStatus[50]}개</span>
+          <span>10원</span>
+          <span id="coin-10-quantity">${returnCoinStatus[10]}개</span>
+        </section>
+      </div>
+    `;
   }
 
   checkDisabled(product) {
@@ -87,6 +81,7 @@ export default class Seller extends Component {
     this.addEvent({ selector: '#charge-button', eventType: 'click', callback: this.handleChargeButton });
     this.addEvent({ selector: '.purchase-table-content', eventType: 'click', callback: this.handlePurchaseButton });
     this.addEvent({ selector: '#coin-return-button', eventType: 'click', callback: this.handleReturnButtonClick });
+    this.addEvent({ selector: '.modal-overlay', eventType: 'click', callback: this.closeModal });
   }
 
   handleChargeButton() {
@@ -159,6 +154,7 @@ export default class Seller extends Component {
     }
 
     this.#synchronizeStorageWithState();
+    this.#showModal();
   }
 
   #changeReturnCoinStatus(returnCoinStatus, remainder) {
@@ -203,5 +199,13 @@ export default class Seller extends Component {
     localStorage.set('return-coin-status', returnCoinStatus);
     localStorage.set('return-amount', returnAmount);
     localStorage.set('charge-amount', chargeAmount);
+  }
+
+  #showModal() {
+    this.target.querySelector('.modal-overlay').style.display = 'block';
+  }
+
+  closeModal({ target }) {
+    target.style.display = 'none';
   }
 }

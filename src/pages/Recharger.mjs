@@ -28,17 +28,23 @@ export default class Recharger extends Component {
       </section>
       <span id="vending-machine-charge-amount">보유 금액: ${holdingCoinAmount}원</span>
       <h2>동전 보유 현황</h2>
-      <section class="coin-status-table">
-        <span>동전</span>
-        <span>개수</span>
-        <span>500원</span>
-        <span id="vending-machine-coin-500-quantity">${holdingCoinStatus[500]}개</span>
-        <span>100원</span>
-        <span id="vending-machine-coin-100-quantity">${holdingCoinStatus[100]}개</span>
-        <span>50원</span>
-        <span id="vending-machine-coin-50-quantity">${holdingCoinStatus[50]}개</span>
-        <span>10원</span>
-        <span id="vending-machine-coin-10-quantity">${holdingCoinStatus[10]}개</span>
+      <section class="coin-status-text">
+        <div>
+          <span>500원</span>
+          <span id="vending-machine-coin-500-quantity">${holdingCoinStatus[500]} 개</span>
+        </div>
+        <div>
+          <span>100원</span>
+          <span id="vending-machine-coin-100-quantity">${holdingCoinStatus[100]} 개</span>
+        </div>
+        <div>
+          <span>50원</span>
+          <span id="vending-machine-coin-50-quantity">${holdingCoinStatus[50]} 개</span>
+        </div>
+        <div>
+          <span>10원</span>
+          <span id="vending-machine-coin-10-quantity">${holdingCoinStatus[10]} 개</span>
+        </div>
       </section>
     `;
   }

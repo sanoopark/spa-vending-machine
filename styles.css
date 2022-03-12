@@ -1,10 +1,34 @@
+:root {
+  --table-border: transparent;
+  --font-color: #1e1e1e;
+}
+
 * {
   outline: 0;
   box-sizing: border-box;
 }
 
-html {
+@font-face {
+  font-family: 'BinggraeMelona';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BinggraeMelona.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Coca Cola ii';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Coca Cola ii'), url('https://fonts.cdnfonts.com/s/25246/Coca Cola ii.woff') format('woff');
+}
+
+html,
+body {
+  width: 100%;
   height: 100%;
+  background-color: #f1f1f1;
+  font-family: 'BinggraeMelona';
+  color: #424242;
 }
 
 ul {
@@ -15,16 +39,52 @@ li {
   list-style: none;
 }
 
+h1,
+h2 {
+  color: white;
+  font-weight: light;
+  letter-spacing: 0.2rem;
+  margin-left: 3px;
+}
+
+h2 {
+  margin-top: 3rem;
+}
+
+button {
+  position: relative;
+  min-height: 39px;
+  width: 6rem;
+  background-color: white;
+  border: 0;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 1px 1px 4px #424242;
+}
+
+button:active {
+  transform: translate(0px, 4px);
+  -webkit-transform: translate(0px, 5px);
+  border-bottom: 3px solid black;
+}
+
 #app {
-  width: 100%;
-  max-width: 1000px;
-  height: 100%;
+  border-radius: 2rem;
   margin: 0 auto;
   padding: 2rem;
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  background-color: #e74c3c;
+  box-shadow: inset 10px 10px 10px#bf2718;
+  color: var(--font-color);
+  z-index: 1;
+  min-width: 768px;
+  position: relative;
 }
 
 .banner {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .banner__control {
@@ -35,10 +95,6 @@ li {
   margin-right: 1rem;
 }
 
-.main {
-  height: 100%;
-}
-
 .control-layout {
   display: flex;
   margin-bottom: 1.5rem;
@@ -47,6 +103,27 @@ li {
 .control-layout > input {
   margin-right: 2rem;
   height: 1.8rem;
+  width: 10rem;
+  border-radius: 10px;
+  border: 0;
+  padding: 1.2rem 1rem;
+}
+
+.main {
+  height: 20rem;
+}
+
+.footer {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translate(-50%, 0);
+  font-family: 'Coca Cola ii', sans-serif;
+  font-size: 5rem;
+  color: white;
+  text-align: center;
+  margin-top: 5rem;
+  text-shadow: #fc0 1px 1px 4px;
 }
 
 /* -- Manager --  */
@@ -58,11 +135,11 @@ li {
   grid-template-rows: repeat(auto-fill, 1fr);
   max-width: 40rem;
   min-height: 5rem;
-  border: 1px solid black;
-}
-
-.product-manage-item {
-  border-top: 0;
+  overflow: hidden;
+  margin: 3rem 0;
+  border-radius: 2rem;
+  background-color: #ffffe0;
+  box-shadow: 0 0 10px 1px #ffffe0;
 }
 
 .product-table-title > span,
@@ -75,7 +152,7 @@ li {
 
 .product-table-title > span:first-child,
 .product-table-title > span:nth-child(2) {
-  border-right: 1px solid black;
+  border-right: 1px solid var(--table-border);
 }
 
 .product-manage-item > span {
@@ -84,42 +161,35 @@ li {
 
 .product-manage-item > span:first-child,
 .product-manage-item > span:nth-child(2) {
-  border-right: 1px solid black;
+  border-right: 1px solid var(--table-border);
 }
 
 /* -- Recharger -- */
 
-.coin-status-table {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(auto-fill, 1fr);
-  max-width: 20rem;
-  min-height: 5rem;
-  border: 1px solid black;
-}
-
-.coin-status-table > span {
+.coin-status-text {
+  color: white;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 5rem;
 }
 
-.coin-status-table > span:nth-child(odd) {
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
+.coin-status-text > div {
+  margin: 1rem 1rem 0 0;
+  font-size: 1.2rem;
 }
 
-.coin-status-table > span:nth-child(9) {
-  border-bottom: 0;
+.coin-status-text span:first-child::after {
+  content: ' :';
 }
 
-.coin-status-table > span:nth-child(even) {
-  border-bottom: 1px solid black;
+.coin-status-text > div:after {
+  content: ',';
 }
 
-.coin-status-table > span:nth-child(10) {
-  border: 0;
+.coin-status-text > div:last-child:after {
+  content: '';
+}
+
+#vending-machine-charge-amount {
+  color: white;
 }
 
 /* -- Seller -- */
@@ -131,7 +201,10 @@ li {
   grid-template-rows: repeat(auto-fill, 1fr);
   max-width: 40rem;
   min-height: 5rem;
-  border: 1px solid black;
+  margin: 3rem 0;
+  border-radius: 2rem;
+  background-color: #ffffe0;
+  box-shadow: 0 0 10px 1px #ffffe0;
 }
 
 .product-purchase-item {
@@ -146,15 +219,49 @@ li {
   min-height: 5rem;
 }
 
-.purchase-table-title > span:not(:last-child) {
-  border-right: 1px solid black;
+.coin-status-table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(auto-fill, 1fr);
+  max-width: 20rem;
+  min-height: 5rem;
+  background-color: white;
+  border-radius: 2rem;
 }
 
-.product-purchase-item > span:not(:last-child) {
-  border-right: 1px solid black;
+.coin-status-table > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 5rem;
 }
 
 #coin-return-button {
   height: 1.8rem;
-  margin: 2rem 0 1rem 0;
+  margin: 1rem 0 1rem 0;
+}
+
+#charge-amount {
+  color: white;
+}
+
+/* -- Modal -- */
+
+.modal-overlay {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  min-width: 20rem;
 }
