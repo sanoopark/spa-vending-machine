@@ -1,0 +1,321 @@
+@font-face {
+  font-family: 'BlackHanSans';
+  src: url('/public/fonts/BlackHanSans.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Coca Cola ii';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Coca Cola ii'), url('/public/fonts/CocaColaii.woff') format('woff');
+}
+
+/* -- Common -- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0 auto;
+  min-width: 280px;
+  max-width: 576px;
+  height: 100%;
+  word-break: keep-all;
+  overflow-y: scroll;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+h1,
+h2 {
+  color: white;
+  letter-spacing: 0.2rem;
+  text-shadow: #fc0 0 0 2px;
+  font-family: 'BlackHanSans';
+}
+
+button {
+  border-radius: 1rem;
+  box-shadow: 1px 1px 1px black;
+  border: 0;
+  background-color: white;
+  padding: 0;
+}
+
+button:active {
+  transform: translate(0px, 4px);
+  border-bottom: 1px solid black;
+}
+
+#app {
+  border-radius: 2rem;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  min-height: 1000px;
+  background-color: #e74c3c;
+  box-shadow: inset 0 0 100px#a82215;
+  color: #1e1e1e;
+  z-index: 1;
+  position: relative;
+  font-size: 1rem;
+}
+
+.main {
+  height: 48rem;
+}
+
+/* -- Banner -- */
+
+.banner {
+  margin-bottom: 3rem;
+}
+
+.banner__title {
+  margin: 0 0 1rem 0;
+  font-size: 4rem;
+  color: white;
+  text-align: center;
+  text-shadow: #fc0 1px 1px 4px;
+  font-family: 'Coca Cola ii', sans-serif;
+  font-weight: normal;
+}
+
+.banner__control {
+  display: flex;
+  justify-content: space-between;
+}
+
+.banner__control li {
+  width: 100%;
+  height: 3rem;
+  flex: 1 1 6rem;
+  padding: 0 2%;
+}
+
+.banner__control button {
+  width: 100%;
+  height: 100%;
+}
+
+/* -- Control -- */
+
+.control-layout {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.control-layout input {
+  border: 0;
+  border-radius: 1rem;
+  margin: 0 0.5rem 1rem 0;
+  padding: 1.2rem 1rem;
+  width: 8rem;
+  min-width: 4rem;
+  height: 1rem;
+}
+
+.control-layout button {
+  min-width: 5rem;
+  height: 2.4rem;
+  margin-left: 0.5rem;
+}
+
+/* -- Manager --  */
+.product-items {
+  margin-bottom: 3rem;
+}
+
+.product-manage-item {
+  display: flex;
+  justify-content: space-around;
+  border-radius: 2rem;
+  margin: 3rem 0;
+  padding: 0 1rem;
+  max-width: 40rem;
+  min-height: 4rem;
+  background-color: #ffffe0;
+  box-shadow: 0 0 10px 1px #ffffe0;
+}
+
+.product-manage-item:first-of-type {
+  margin: 0;
+}
+
+.product-manage-item > span {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 576px) {
+  #app {
+    min-height: 1100px;
+  }
+
+  .control-layout {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .control-layout input {
+    width: 12rem;
+  }
+
+  .control-layout > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .control-layout > button {
+    width: 6rem;
+    margin: auto 0;
+  }
+}
+
+/* -- Recharger -- */
+
+.coin-status-text > div {
+  display: flex;
+  justify-content: space-around;
+  border-radius: 2rem;
+  margin: 3rem 0;
+  padding: 0 1rem;
+  max-width: 40rem;
+  min-height: 4rem;
+  background-color: #ffffe0;
+  box-shadow: 0 0 10px 1px #ffffe0;
+}
+
+.coin-status-text > div:first-of-type {
+  margin: 0;
+}
+
+.coin-status-text > div > span {
+  display: flex;
+  align-items: center;
+}
+
+#vending-machine-charge-amount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  height: 2.4rem;
+  color: white;
+  font-size: 1.2rem;
+}
+
+/* -- Seller -- */
+
+.product-purchase-item {
+  display: flex;
+  justify-content: space-around;
+  border-radius: 2rem;
+  margin: 3rem 0;
+  padding: 0 1rem;
+  max-width: 40rem;
+  min-height: 4rem;
+  background-color: #ffffe0;
+  box-shadow: 0 0 10px 1px #ffffe0;
+}
+
+.product-purchase-item:first-of-type {
+  margin: 0;
+}
+
+.product-purchase-item > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.product-purchase-item button {
+  padding: 0 0.8rem;
+  height: 2.4rem;
+}
+
+#coin-return-button {
+  position: relative;
+  bottom: 1rem;
+  display: block;
+  margin: 0 auto 1.8rem auto;
+  min-width: 7.2rem;
+  height: 2.4rem;
+}
+
+#charge-amount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  height: 2.4rem;
+  color: white;
+  font-size: 1.2rem;
+}
+
+/* -- Modal -- */
+
+.coin-status-table {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+  height: 30%;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  background-color: white;
+}
+
+.coin-status-table > div {
+  margin: 0 auto;
+}
+
+.modal-overlay {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  box-shadow: inset 0 0 20px #c2c2c2;
+}

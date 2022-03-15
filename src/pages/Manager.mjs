@@ -5,7 +5,6 @@ import { localStorage } from '../storage.mjs';
 export default class Manager extends Component {
   mounted() {
     this.synchronizeStateWithStorage();
-    this.calculateContainerHeight();
   }
 
   synchronizeStateWithStorage() {
@@ -16,49 +15,41 @@ export default class Manager extends Component {
     });
   }
 
-  calculateContainerHeight() {
-    const number = this.state.productStatus.length;
-    const viewport = window.innerHeight;
-
-    if (number === 1) {
-      document.querySelector('#app').style.height = viewport;
-      return;
-    }
-
-    document.querySelector('#app').style.height = `${148 * (number - 1) + viewport}px`;
-  }
-
   render() {
     const { productStatus } = this.state;
 
     this.target.innerHTML = `
-      <h2>상품 추가하기</h2>
+      <h2>상품 등록</h2>
       <section class="control-layout">
-        <label for="product-name-input" hidden>상품명</label>
-        <input type="text" id="product-name-input" placeholder="상품명" />
-        <label for="product-price-input" hidden>가격</label>
-        <input type="number" id="product-price-input" min="0" placeholder="가격" />
-        <label for="product-quantity-input" hidden>수량</label>
-        <input type="number" id="product-quantity-input" min="0" placeholder="수량" />
+        <div>
+          <label for="product-name-input" hidden>상품명</label>
+          <input type="text" id="product-name-input" placeholder="상품명" />
+          <label for="product-price-input" hidden>가격</label>
+          <input type="number" id="product-price-input" min="0" placeholder="가격" />
+          <label for="product-quantity-input" hidden>수량</label>
+          <input type="number" id="product-quantity-input" min="0" placeholder="수량" />
+        </div>
         <button type="button" id="product-add-button">추가하기</button>
       </section>
-      <h2>상품 현황</h2>
-      ${productStatus
-        ?.map(
-          (row, index) => `
-            <div class="product-manage-item">
-              ${Object.entries(row)
-                .map(
-                  ([key, value]) => `
-                    <span class="product-manage-${key}" data-row="${index}" data-type="${key}">
-                    ${value}${this.unitGenerator(key)}</span>
-                    `
-                )
-                .join('')}
-            </div>
-          `
-        )
-        .join('')}
+      <h2>상품 목록</h2>
+      <div class="product-items">
+        ${productStatus
+          ?.map(
+            (row, index) => `
+              <div class="product-manage-item">
+                ${Object.entries(row)
+                  .map(
+                    ([key, value]) => `
+                      <span class="product-manage-${key}" data-row="${index}" data-type="${key}">
+                      ${value}${this.unitGenerator(key)}</span>
+                      `
+                  )
+                  .join('')}
+              </div>
+            `
+          )
+          .join('')}
+      </div>
     `;
   }
 
@@ -73,6 +64,12 @@ export default class Manager extends Component {
     const isEmptyInput = values.some(value => value === '');
     const isLeastPrice = price >= 100;
     const isValidPriceUnit = price % 10 === 0;
+    const isMaximumNumber = this.state.productStatus.length === 5;
+
+    if (isMaximumNumber) {
+      alert(MESSAGE.MAXIMUM);
+      return;
+    }
 
     if (this.#isInvalidInputValue(isEmptyInput, isLeastPrice, isValidPriceUnit)) return;
 
@@ -81,8 +78,6 @@ export default class Manager extends Component {
     });
 
     localStorage.set('product-status', this.state.productStatus);
-
-    this.#increaseContainerHeight();
   }
 
   #isInvalidInputValue(isEmptyInput, isLeastPrice, isValidPriceUnit) {
@@ -113,10 +108,5 @@ export default class Manager extends Component {
       default:
         return '';
     }
-  }
-
-  #increaseContainerHeight() {
-    const containerHeight = document.querySelector('#app').offsetHeight;
-    document.querySelector('#app').style.height = `${containerHeight + 148}px`;
   }
 }

@@ -6,6 +6,7 @@ export const MESSAGE = {
   SHORT_QUANTITY: '수량이 부족합니다',
   LEAST_PRICE: '100원 이상의 상품 가격을 입력해 주세요',
   PRICE_UNIT: '10원 단위의 상품 가격을 입력해 주세요',
+  MAXIMUM: '5개 이하의 상품만 추가할 수 있습니다.',
 };
 
 export const COINS = [500, 100, 50, 10];

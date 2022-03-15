@@ -20,14 +20,14 @@ export default class Recharger extends Component {
     const { holdingCoinStatus, holdingCoinAmount } = this.state;
 
     this.target.innerHTML = `
-      <h2>자판기 동전 충전하기</h2>
+      <h2>동전 충전</h2>
       <section class="control-layout">
         <label for="vending-machine-charge-input" hidden>충전 금액</label>
         <input type="number" id="vending-machine-charge-input" min="0" placeholder="금액" />
         <button type="button" id="vending-machine-charge-button">충전하기</button>
+        <div id="vending-machine-charge-amount">보유 금액 : ${holdingCoinAmount}원</div>
       </section>
-      <span id="vending-machine-charge-amount">보유 금액: ${holdingCoinAmount}원</span>
-      <h2>동전 보유 현황</h2>
+      <h2>보유 동전</h2>
       <section class="coin-status-text">
         <div>
           <span>500원</span>

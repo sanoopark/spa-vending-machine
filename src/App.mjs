@@ -19,7 +19,7 @@ export default class App extends Component {
       path: ['/', '/manage'],
       component: Manager,
       target: mainElement,
-      state: { productStatus: [{ name: '코카콜라', price: 2000, quantity: 20 }] },
+      state: { productStatus: [{ name: '🥤 코카콜라', price: 2000, quantity: 20 }] },
     });
 
     route({
@@ -50,7 +50,7 @@ export default class App extends Component {
   render() {
     this.target.innerHTML = `
       <header class="banner">
-        <h1 class="banner__title">자판기</h1>
+        <h1 class="banner__title">CocaCola</h1>
         <ul class="banner__control">
           <li>
             <button type="button" id="product-purchase-menu" data-href="/manage">상품 관리</button>
@@ -64,7 +64,6 @@ export default class App extends Component {
         </ul>
       </header>
       <main class="main"></main>
-      <footer class="footer">CocaCola</footer>
     `;
   }
 
