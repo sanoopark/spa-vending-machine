@@ -163,7 +163,7 @@ export default class Seller extends Component {
     }
 
     this.#synchronizeStorageWithState();
-    this.#showModal();
+    this.showModal();
   }
 
   #changeReturnCoinStatus(returnCoinStatus, remainder) {
@@ -210,11 +210,17 @@ export default class Seller extends Component {
     localStorage.set('charge-amount', chargeAmount);
   }
 
-  #showModal() {
+  showModal() {
     this.target.querySelector('.modal-overlay').style.display = 'block';
+    this.toggleOverflowHidden();
   }
 
   closeModal({ target }) {
     target.style.display = 'none';
+    this.toggleOverflowHidden();
+  }
+
+  toggleOverflowHidden() {
+    document.body.classList.toggle('modal-open');
   }
 }
