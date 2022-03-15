@@ -10,6 +10,8 @@ export default class Manager extends Component {
   synchronizeStateWithStorage() {
     const { productStatus } = this.state;
 
+    localStorage.set('product-status', this.state.productStatus);
+
     this.setState({
       productStatus: localStorage.get('product-status') || productStatus,
     });
@@ -45,6 +47,7 @@ export default class Manager extends Component {
                       `
                   )
                   .join('')}
+                  <button type="button" class="product-delete-button" data-row="${index}">삭제하기</button>
               </div>
             `
           )
@@ -55,6 +58,7 @@ export default class Manager extends Component {
 
   setEvent() {
     this.addEvent({ selector: '#product-add-button', eventType: 'click', callback: this.handleAddButtonClick });
+    this.addEvent({ selector: '.product-items', eventType: 'click', callback: this.handleDeleteButtonClick });
   }
 
   handleAddButtonClick() {
@@ -97,6 +101,19 @@ export default class Manager extends Component {
     }
 
     return false;
+  }
+
+  handleDeleteButtonClick({ target }) {
+    if (target.className !== 'product-delete-button') return;
+
+    const productIndex = Number(target.dataset.row);
+    const { productStatus } = this.state;
+
+    this.setState({
+      productStatus: productStatus.filter((_, arrayIndex) => arrayIndex !== productIndex),
+    });
+
+    localStorage.set('product-status', this.state.productStatus);
   }
 
   unitGenerator(key) {

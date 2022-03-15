@@ -174,6 +174,16 @@ button:active {
   text-overflow: ellipsis;
 }
 
+.product-delete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 0 0.8rem;
+  max-width: 5rem;
+  height: 2.4rem;
+}
+
 @media (max-width: 576px) {
   #app {
     min-height: 1100px;
@@ -267,7 +277,7 @@ button:active {
   position: relative;
   bottom: 1rem;
   display: block;
-  margin: 0 auto 1.8rem auto;
+  margin: 3.6rem auto 1.8rem auto;
   min-width: 7.2rem;
   height: 2.4rem;
 }
