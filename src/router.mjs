@@ -1,3 +1,8 @@
+// https://github.com/sanoopark/vanila-spa-router
+
+/**
+ * @param {string} path - Pathname to be redirected
+ */
 export const redirect = path => {
   const { pathname } = window.location;
 
@@ -10,6 +15,9 @@ export const redirect = path => {
   window.dispatchEvent(locationChangeEvent);
 };
 
+/**
+ * @param {function} callback - Function to be executed when history pushState.
+ */
 export const browserRoute = callback => {
   const handleLocationChange = e => {
     const { href } = e.detail;
@@ -22,28 +30,55 @@ export const browserRoute = callback => {
   window.addEventListener('popstate', callback);
 };
 
-const rootElement = document.body.firstElementChild;
-
-export const route = ({ path, component, target = rootElement, state = {} }) => {
+/**
+ * @param {(string|string[])} path - Pathname to set the route.
+ * @param {function} component - Function or Class to create an instance.
+ * @param {HTMLElement} target - HTMLElement to which the component is mounted.
+ * @param {object} state - State to be updated on the component.
+ */
+export const route = ({ path: targetPath, component, target, state = {} }) => {
   const { pathname: currentPath } = window.location;
 
-  if (Array.isArray(path)) {
-    const isRouteRequired = path
-      .map(string => createPathRegex(string))
-      .some(targetRegex => targetRegex.test(currentPath));
-    isRouteRequired && new component(target, state);
-    return;
+  if (Array.isArray(targetPath)) {
+    targetPath.forEach(oneTargetPath => {
+      matchComponentWithCurrentPath(oneTargetPath, component, target, state, currentPath);
+    });
+  } else {
+    matchComponentWithCurrentPath(targetPath, component, target, state, currentPath);
   }
-
-  const isRouteRequired = createPathRegex(path).test(currentPath);
-  isRouteRequired && new component(target, state);
 };
 
-const createPathRegex = path => {
-  return new RegExp(processPathname(path) + '/?(\\w+)?');
+const matchComponentWithCurrentPath = (targetPath, component, target, state, currentPath) => {
+  const isRouteRequired = checkIsPathMatched(targetPath, currentPath);
+  if (!isRouteRequired) return;
+
+  const paramName = getParameter(targetPath);
+  const paramValue = getParameter(currentPath);
+
+  if (paramName) {
+    createComponentWithParam(target, state, component, paramName, paramValue);
+  } else {
+    createComponentWithoutParam(target, state, component);
+  }
 };
 
-const processPathname = currentPath => {
-  const [pathname, parameter] = currentPath.split(':');
-  return parameter ? pathname.slice(0, -1) : pathname;
+const checkIsPathMatched = (targetPath, currentPath) => {
+  const isTargetPathWithParam = /(\/:\w+)$/.test(targetPath);
+  if (!isTargetPathWithParam) return targetPath === currentPath;
+  const targetPathWithoutParam = targetPath.replace(/(\/:\w+)$/, '');
+  const currentPathWithoutParam = currentPath.replace(/(\/\w+)$/, '');
+  return targetPathWithoutParam === currentPathWithoutParam;
+};
+
+const getParameter = path => {
+  const regexGettingParam = /\w+$/i;
+  return regexGettingParam.exec(path) && regexGettingParam.exec(path)[0];
+};
+
+const createComponentWithParam = (target, state, component, paramName, paramValue) => {
+  new component(target, { ...state, param: { [paramName]: paramValue } });
+};
+
+const createComponentWithoutParam = (target, state, component) => {
+  new component(target, state);
 };
